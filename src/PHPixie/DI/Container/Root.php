@@ -59,11 +59,11 @@ abstract class Root extends \PHPixie\DI\Container
     protected function create($class, $arguments)
     {
         foreach($arguments as $key => $value) {
-            if(is_string($value) && $value{0} == '!') {
+            if(is_string($value) && $value{0} == '@') {
                 $arguments[$key] = $this->get(substr($value, 1));
             }
         }
-        
+
         if($this->hasSplat) {
             return new $class(...$arguments);
         }

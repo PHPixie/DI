@@ -23,8 +23,8 @@ class ContainerStub extends \PHPixie\DI\Container\Root
         $this->build('c', function() {
             return new \stdClass;
         });
-        $this->instance('d', '\PHPixie\Tests\DI\InstanceStub', array(8, 'a', '!a'));
-        $this->instance('d1', '\PHPixie\Tests\DI\InstanceStub', array(8, 'a', '!a'));
+        $this->instance('d', '\PHPixie\Tests\DI\InstanceStub', array(8, 'a', '@a'));
+        $this->instance('d1', '\PHPixie\Tests\DI\InstanceStub', array(8, 'a', '@a'));
 
         $this->group('e', function() {
             $this->value('f', 5);
