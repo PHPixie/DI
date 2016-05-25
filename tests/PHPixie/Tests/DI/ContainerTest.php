@@ -24,7 +24,6 @@ class ContainerStub extends \PHPixie\DI\Container\Root
             return new \stdClass;
         });
         $this->instance('d', '\PHPixie\Tests\DI\InstanceStub', array(8, 'a', '@a'));
-        $this->instance('d1', '\PHPixie\Tests\DI\InstanceStub', array(8, 'a', '@a'));
 
         $this->group('e', function() {
             $this->value('f', 5);
@@ -33,11 +32,6 @@ class ContainerStub extends \PHPixie\DI\Container\Root
             });
             $this->value('h', new \ArrayObject(array(1, 2, 3)));
         });
-    }
-
-    public function setHasSplat($hasSplat)
-    {
-        $this->hasSplat = $hasSplat;
     }
 }
 
@@ -83,10 +77,6 @@ class ContainerTest extends \PHPixie\Test\Testcase
         $this->assertSame(3, $container->call('e.h.offsetGet', array(2)));
         $this->assertSame(3, $container->get('e.h.count'));
         $this->assertSame(1, $container->get('e.h.getIterator.current'));
-
-        $container->setHasSplat(false);
-        $d1 = $container->get('d1');
-        $this->assertSame(array(8, 'a', 5), $d1->args);
 
         try{
             $container->get('e.l');

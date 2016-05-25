@@ -6,12 +6,10 @@ abstract class Root extends \PHPixie\DI\Container
 {
     static protected $instances = array();
 
-    protected $hasSplat;
     protected $currentContainer;
 
     public function __construct()
     {
-        $this->hasSplat = version_compare(PHP_VERSION, '5.6.0') >= 0;
         $this->currentContainer = $this;
 
         $this->configure();
@@ -62,10 +60,6 @@ abstract class Root extends \PHPixie\DI\Container
             if(is_string($value) && $value{0} == '@') {
                 $arguments[$key] = $this->get(substr($value, 1));
             }
-        }
-
-        if($this->hasSplat) {
-            return new $class(...$arguments);
         }
 
         $reflection  = new \ReflectionClass($class);
